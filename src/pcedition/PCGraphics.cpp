@@ -76,15 +76,15 @@ namespace pce::Graphics
 			std::string p = gp.GetNormalizedPathString();
 			boost::replace_all(p, "\\", "/");
 			return boost::icontains(p, "BreathOfTheWild/Graphics/rules.txt") ||
-			       boost::icontains(p, "BreathOfTheWild/Mods/FPS++/rules.txt") ||
-			       boost::icontains(p, "BotWPCEdition/rules.txt");
+				   boost::icontains(p, "BreathOfTheWild/Mods/FPS++/rules.txt") ||
+				   boost::icontains(p, "BotWPCEdition/rules.txt");
 		}
 
 		bool IsForBotW(const GraphicPack2& gp)
 		{
 			return gp.ContainsTitleId(0x00050000101C9300ULL) ||
-			       gp.ContainsTitleId(0x00050000101C9400ULL) ||
-			       gp.ContainsTitleId(0x00050000101C9500ULL);
+				   gp.ContainsTitleId(0x00050000101C9400ULL) ||
+				   gp.ContainsTitleId(0x00050000101C9500ULL);
 		}
 
 		std::string PackId(const GraphicPack2& gp)
@@ -808,7 +808,7 @@ blr
 				}
 			}
 		}
-	}
+	} // namespace
 
 	int EffectiveAspect(int setting)
 	{
@@ -834,23 +834,47 @@ blr
 	{
 		// (resolutions the community graphics pack has for each aspect ratio)
 		static const std::vector<ResolutionOption> r16_9 = {
-			{1280, 720, "1280 x 720"}, {1920, 1080, "1920 x 1080"}, {2560, 1440, "2560 x 1440"}, {3200, 1800, "3200 x 1800"}, {3840, 2160, "3840 x 2160"},
+			{320, 180, "320 x 180"},
+			{640, 360, "640 x 360"},
+			{960, 540, "960 x 540"},
+			{1280, 720, "1280 x 720"},
+			{1600, 900, "1600 x 900"},
+			{1920, 1080, "1920 x 1080"},
+			{2560, 1440, "2560 x 1440"},
+			{3200, 1800, "3200 x 1800"},
+			{3840, 2160, "3840 x 2160"},
 		};
 		static const std::vector<ResolutionOption> r16_10 = {
-			{1280, 800, "1280 x 800"}, {1920, 1200, "1920 x 1200"}, {2560, 1600, "2560 x 1600"}, {2880, 1800, "2880 x 1800"}, {3840, 2400, "3840 x 2400"},
+			{1280, 800, "1280 x 800"},
+			{1920, 1200, "1920 x 1200"},
+			{2560, 1600, "2560 x 1600"},
+			{2880, 1800, "2880 x 1800"},
+			{3840, 2400, "3840 x 2400"},
 		};
 		static const std::vector<ResolutionOption> r21_9 = {
-			{1720, 720, "1720 x 720"}, {2560, 1080, "2560 x 1080"}, {3440, 1440, "3440 x 1440"}, {4300, 1800, "4300 x 1800"}, {5120, 2160, "5120 x 2160"},
+			{1720, 720, "1720 x 720"},
+			{2560, 1080, "2560 x 1080"},
+			{3440, 1440, "3440 x 1440"},
+			{4300, 1800, "4300 x 1800"},
+			{5120, 2160, "5120 x 2160"},
 		};
 		static const std::vector<ResolutionOption> r32_9 = {
-			{3840, 1080, "3840 x 1080 (smallest)"}, {3840, 1080, "3840 x 1080"}, {5120, 1440, "5120 x 1440"}, {5120, 1440, "5120 x 1440 (largest below 2160)"}, {7680, 2160, "7680 x 2160"},
+			{3840, 1080, "3840 x 1080 (smallest)"},
+			{3840, 1080, "3840 x 1080"},
+			{5120, 1440, "5120 x 1440"},
+			{5120, 1440, "5120 x 1440 (largest below 2160)"},
+			{7680, 2160, "7680 x 2160"},
 		};
 		switch (aspect)
 		{
-		case 2: return r16_10;
-		case 3: return r21_9;
-		case 4: return r32_9;
-		default: return r16_9;
+		case 2:
+			return r16_10;
+		case 3:
+			return r21_9;
+		case 4:
+			return r32_9;
+		default:
+			return r16_9;
 		}
 	}
 
@@ -858,7 +882,12 @@ blr
 	{
 		sint32 ix = 0, iy = 0, iw = 0, ih = 0, fw = 0, fh = 0;
 		LatteRenderTarget_getScreenImageArea(&ix, &iy, &iw, &ih, &fw, &fh, false);
-		x = ix; y = iy; width = iw; height = ih; windowWidth = fw; windowHeight = fh;
+		x = ix;
+		y = iy;
+		width = iw;
+		height = ih;
+		windowWidth = fw;
+		windowHeight = fh;
 		return iw > 0 && ih > 0 && fw > 0 && fh > 0;
 	}
 
@@ -1199,4 +1228,4 @@ blr
 	{
 		return sRestartPending || sModsRestartPending;
 	}
-}
+} // namespace pce::Graphics
